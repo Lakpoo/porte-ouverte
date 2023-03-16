@@ -2,7 +2,7 @@
 
 html {
   background: url(bg1.png);
-  background-size: 3260px 2160px;
+  background-size: 3840px 2090px;
   font-family: 'Montserrat', sans-serif;
 }
 
@@ -23,7 +23,7 @@ img {
 .main{
   display: flex;
   justify-content: center;
-  padding-top: 2rem;
+  padding-top: 1rem;
 }
 
 .num_random span{
