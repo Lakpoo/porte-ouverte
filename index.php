@@ -73,7 +73,7 @@
 
     <?php if (!$estGagnant && $numeroAttribue !== null): ?>
         <div class="gagnant_perdant">
-            <p>Désolé, vous n'avez pas gagné.</p>
+            <p>Désolé, vous avez perdu.</p>
         </div>
     <?php endif; ?>
 </body>
