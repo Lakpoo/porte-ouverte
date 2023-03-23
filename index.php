@@ -24,13 +24,14 @@
     </div>
     <?php
     
-    $gagnants = array(89, 51, 37, 125);
+    //Valeurs gagnante à choisir
+    $gagnants = array(89, 54, 38, 126);
 
     $numeroAttribue = isset($_POST['numero']) ? (int)$_POST['numero'] : null;
     if ($numeroAttribue === null) {
         $numeroAttribue = rand(0, 200);
     }
-
+    //condition definir le gagnant
     $estGagnant = false;
     if ($numeroAttribue !== null) {
         foreach ($gagnants as $gagnant) {
@@ -53,6 +54,7 @@
     </form>
 
     <script>
+        //animation numero qui defile ainsi que la recuperation de la reponse $estGagnant
         var num = <?php echo $numeroAttribue; ?>;
         var length = num.toString().length;
         var span = document.getElementById("number");
@@ -70,7 +72,6 @@
             }(i), i * 20);
         }
     </script>
-
     <?php if (!$estGagnant && $numeroAttribue !== null): ?>
         <div class="gagnant_perdant">
             <p>Désolé, vous avez perdu.</p>
