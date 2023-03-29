@@ -24,7 +24,7 @@
     </div>
 
 <?php 
-    $numeroAttribue = isset($_POST["test"]) ? rand(0,200) : null;
+    $numeroAttribue = isset($_POST["test"]) ? rand(0,20) : null;
     if ($numeroAttribue !== null):
 ?>
 
@@ -86,12 +86,12 @@ function getRandomInt(max) {
                     if (!$estGagnant && $numeroAttribue !== null)
                     {
                         ?>
-                        document.getElementById("content_gagnant").textContent = "Vous avez perdu !";
+                        document.getElementById("content_gagnant").textContent = "Vous avez perdu :(";
                         <?php
                     }
                         if ($estGagnant && $numeroAttribue !== null){
                     ?>
-                        document.getElementById("content_gagnant").textContent = "Félicitations vous avez gagné";
+                        document.getElementById("content_gagnant").textContent = "Félicitations vous avez gagné !";
                         <?php
                         }
                         ?>  
@@ -104,10 +104,23 @@ function getRandomInt(max) {
     </script>
     <?php } ?>
     <script>
-        setTimeout(function(){
-        var gagnantPerdantDiv = document.getElementById("gagnant_perdant");
-        gagnantPerdantDiv.style.display = "none";
-        }, 6000); 
+        <?php if (!$estGagnant && $numeroAttribue !== null) { ?>
+
+            setTimeout(function(){
+            var gagnantPerdantDiv = document.getElementById("gagnant_perdant");
+            gagnantPerdantDiv.style.display = "none";
+            }, 6000); 
+
+        <?php } ?> 
+
+        <?php if ($estGagnant && $numeroAttribue !== null) { ?>
+
+            setTimeout(function(){
+            var gagnantPerdantDiv = document.getElementById("gagnant_perdant");
+            gagnantPerdantDiv.style.display = "none";
+            }, 15000); 
+
+        <?php } ?> 
     </script>
 </body>
 </html>
