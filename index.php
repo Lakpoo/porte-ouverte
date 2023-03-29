@@ -18,64 +18,96 @@
 
     <div class="main">
         <div id="title">
-            <h1>Bienvenue à cette journée de portes ouvertes !</h1>
-            <p>Cliquez sur le button pour avoir une chance de remporter un lot.</p>
+            <h1>Bienvenue à cette journée de Portes Ouvertes !</h1>
+            <p>Cliquez sur le bouton pour avoir une chance de remporter un lot.</p>
         </div>
     </div>
-    <?php
-    
-    //Valeurs gagnante à choisir
-    $gagnants = array(89, 54, 38, 126);
 
-    $numeroAttribue = isset($_POST['numero']) ? (int)$_POST['numero'] : null;
-    if ($numeroAttribue === null) {
-        $numeroAttribue = rand(0, 200);
-    }
-    //condition definir le gagnant
-    $estGagnant = false;
-    if ($numeroAttribue !== null) {
-        foreach ($gagnants as $gagnant) {
-            if ($gagnant === $numeroAttribue) {
-                $estGagnant = true;
-                break;
-            }
-        }
-    }
-    ?>
-    <?php if ($numeroAttribue !== null): ?>
+<?php 
+    $numeroAttribue = isset($_POST["test"]) ? rand(0,20) : null;
+    if ($numeroAttribue !== null):
+?>
+
         <div class="num_random">
-            <span id="number">000</span>
+            <span id="number"></span>
         </div>
     <?php endif; ?>
     <form method="post">
         <div id="main_content">
+            <input name="test" hidden />
             <button id="button" type="submit">Appuyez ici</button>
         </div>
     </form>
 
-    <script>
-        //animation numero qui defile ainsi que la recuperation de la reponse $estGagnant
-        var num = <?php echo $numeroAttribue; ?>;
-        var length = num.toString().length;
-        var span = document.getElementById("number");
-        for (var i = 0; i <= num; i++) {
-            setTimeout(function(n) {
-                return function() {
-                    var content = n.toString().padStart(length, '0');
-                    span.textContent = content;
-                    if (n === num && <?php echo $estGagnant ? 'true' : 'false'; ?>) {
-                        setTimeout(function() {
-                            alert("Félicitations ! Vous avez gagné !");
-                        }, 500);
-                    }
+    <div class='gagnant_perdant' id='gagnant_perdant'>
+        <p id='content_gagnant'></p>
+    </div>
+
+<?php    
+    //Valeurs gagnante à choisir
+    $gagnants = array(12, 9, 6);
+
+    $estGagnant = false;
+   
+    if ($numeroAttribue != null)
+    {
+    //condition definir le gagnant
+        if ($numeroAttribue !== null) {
+            foreach ($gagnants as $gagnant) {
+                if ($gagnant === $numeroAttribue) {
+                    $estGagnant = true;
+                    break;
                 }
-            }(i), i * 20);
+            }
         }
+?>
+
+<script>
+
+
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
+
+    //animation numero qui defile ainsi que la recuperation de la reponse $estGagnant
+    var num =  200;
+    var numberr = <?php echo $numeroAttribue;?>;
+    var length = num.toString().length;
+    var span = document.getElementById("number");
+    for (var i = 0; i <= num; i++) {
+        setTimeout(function(n) {
+            return function() {
+                var content = getRandomInt(200);
+                if(n == num)
+                {
+                    span.textContent = numberr.toString().padStart(length, '0');
+
+                    <?php 
+                    if (!$estGagnant && $numeroAttribue !== null)
+                    {
+                        ?>
+                        document.getElementById("content_gagnant").textContent = "Vous avez perdu !";
+                        <?php
+                    }
+                        if ($estGagnant && $numeroAttribue !== null){
+                    ?>
+                        document.getElementById("content_gagnant").textContent = "Félicitations vous avez gagné";
+                        <?php
+                        }
+                        ?>  
+                }
+                else
+                    span.textContent = content.toString().padStart(length, '0');
+            }
+        }(i), i*10);
+    }
     </script>
-    <?php if (!$estGagnant && $numeroAttribue !== null): ?>
-        <div class="gagnant_perdant">
-            <p>Désolé, vous avez perdu.</p>
-        </div>
-    <?php endif; ?>
+    <?php } ?>
+    <script>
+        setTimeout(function(){
+        var gagnantPerdantDiv = document.getElementById("gagnant_perdant");
+        gagnantPerdantDiv.style.display = "none";
+        }, 5000); 
+    </script>
 </body>
 </html>
