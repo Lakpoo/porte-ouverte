@@ -24,7 +24,7 @@
     </div>
 
 <?php 
-    $numeroAttribue = isset($_POST["test"]) ? rand(0,20) : null;
+    $numeroAttribue = isset($_POST["test"]) ? rand(0,200) : null;
     if ($numeroAttribue !== null):
 ?>
 
@@ -107,7 +107,7 @@ function getRandomInt(max) {
         setTimeout(function(){
         var gagnantPerdantDiv = document.getElementById("gagnant_perdant");
         gagnantPerdantDiv.style.display = "none";
-        }, 5000); 
+        }, 6000); 
     </script>
 </body>
 </html>
